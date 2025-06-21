@@ -2,19 +2,17 @@ package com.becoder.entity;
 
 import java.util.Date;
 
+import lombok.*;
 import org.hibernate.internal.build.AllowNonPortable;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Getter
 @Setter
-@AllowNonPortable
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class Category extends BaseModel{
