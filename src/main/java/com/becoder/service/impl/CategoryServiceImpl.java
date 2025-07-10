@@ -3,6 +3,7 @@ package com.becoder.service.impl;
 import com.becoder.dto.CategoryDto;
 import com.becoder.dto.CategoryResponse;
 import com.becoder.entity.Category;
+import com.becoder.exception.ResourceNotFoundException;
 import com.becoder.repository.CategoryRepository;
 import com.becoder.service.CategoryService;
 import org.modelmapper.ModelMapper;
@@ -51,12 +52,9 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDto getCategoryById(Integer id) {
-        Optional<Category> findByCategory = categoryRepository.findByIdAndIsDeletedFalse(id);
-        if (findByCategory.isPresent()) {
-            Category category = findByCategory.get();
-            return mapper.map(category, CategoryDto.class);
-        }
-        return null;
+        Category category = categoryRepository.findByIdAndIsDeletedFalse(id)
+                .orElseThrow(()->new ResourceNotFoundException("Category not found with id: " + id));
+        return mapper.map(category, CategoryDto.class);
     }
 
     @Override
