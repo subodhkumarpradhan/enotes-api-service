@@ -7,11 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/category")
@@ -46,11 +44,7 @@ public class CategoryController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getCategoryById(@PathVariable Integer id) {
-        CategoryDto categoryDto = categoryService.getCategoryById(id);
-        if (ObjectUtils.isEmpty(categoryDto)){
-            return new ResponseEntity<>("Category not found with Id = " + id, HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(categoryDto, HttpStatus.OK);
+        return new ResponseEntity<>(categoryService.getCategoryById(id), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
